@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Red Hat Display', sans-serif;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  scroll-behavior: smooth;
+}
+.app {
+  background-color: #2f2f3c;
+  min-height: 100vh;
+  padding-top: 90px;
+  padding-bottom: 20px;
+  @media (min-width: 780px) {
+    padding-top: 110px;
+    padding-bottom: 20px;
+  }
+  
+}
