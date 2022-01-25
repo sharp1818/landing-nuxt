@@ -40,7 +40,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  @media (min-width: 500px) {
+  @media (min-width: 780px) {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -76,7 +76,7 @@ export default {
       height: 300px;
     }
     &:hover{
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
   .info {
@@ -97,7 +97,7 @@ export default {
       font-size: 20px;
       }
     }
-    @media (min-width: 500px) {
+    @media (min-width: 780px) {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

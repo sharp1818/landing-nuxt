@@ -106,6 +106,9 @@ export default {
       @media (min-width:300px) {
         grid-template-columns: repeat(1, 1fr);
       }
+      @media (min-width:500px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
       @media (min-width:780px) {
         grid-template-columns: repeat(2, 1fr);
       }
