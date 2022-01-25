@@ -1,6 +1,13 @@
 <template>
   <div class="about-us">
-    <ServiceModal v-if="modal" @close-modal="closeModal" />
+    <ServiceModal
+      v-if="modal"
+      :title="title"
+      :description="description"
+      :list="list"
+      :filename="filename"
+      @close-modal="closeModal"
+    />
     <div class="title">
       <h1>
         NUESTROS SERVICIOS
@@ -8,7 +15,7 @@
     </div>
     <div class="layout">
       <div class="container-service">
-        <ul v-for="(service, index) in services" :key="index" :class="active" class="service" @click="closeModal">
+        <ul v-for="(service, index) in services" :key="index" class="service" @click="closeModal(); showInfo(index)">
           <li class="service-layout">
             <div class="service-background">
               {{ service.name }} <img src="../assets/icons/servicios/arrow.svg" alt="" class="arrow-icon">
@@ -28,22 +35,30 @@ export default {
   data () {
     return {
       modal: null,
+      filename: '',
       title: '',
-      description: 'Ofrecemos calidad, al mejor precio',
+      description: '',
+      list: [],
       photo: 'service-logo',
       services: [
-        { name: 'Instalaciones Eléctricas', class: 'class1', title: 'Mantenimientos e Instalaciones Eléctricas', description: 'Brindamos servicios de instalación y mantenimiento eléctrico en comercios, residencias e industrias, respetando las normas del código nacional de electricidad y el reglamento nacional de edificaciones. Ofrecemos soluciones a la medida al precio justo, con el estándar de calidad, seguridad para lograr la satisfacción de cada uno de nuestros clientes.', photo: '1' },
-        { name: 'Sistemas Eléctricos', class: 'class2', title: 'Mantenimiento, Instalacion y Diseño de Sistemas Eléctricos', description: 'Brindamos servicios de diseño de sistemas eléctricos de Media y Baja Tensión, subestaciones eléctricas, sistema de iluminación, estudios eléctricos de flujo de carga, cortocircuito, arranque de motores, arco eléctrico. Ademas realizamos mantenimiento preventivo y correctivo.', photo: '2' },
-        { name: 'Sistemas Electrónicos', class: 'class3', title: 'Mantenimiento, Instalacion y Diseño de Sistemas Eléctrónicos', description: 'Brindamos el servicio de Programación de PLC y HMI,Configuracion y puesta en marcha de Variadores de frecuencia para servomotores, Instalación de sistemas de supervisión y control SCADA, Comunicacion Inalámbrica, Telemetría, Tableros de control de PLC, Tambien brindamos soporte a plantas de nivel, presioón, entre otros.', photo: '3' },
-        { name: 'Panos Eléctricos Industriales', class: 'class4', title: 'Elaboración y Diseño de Planos Industriales', description: 'Brindamos el servicio de planos Eléctricos, Diagramas Unifilares, Conexión Domiciliaria, Red de Alimentación, Banco de Medidores, Circuitos Eléctricos de Alimentación, Conmutaciones, Bombas para Cistenas y Tanque, Sistemas de Ascensores, Red de Alumbrado exterior, hacemos todo Respetando las Normas Técnicas Vigentes para que el inspector de Enel apruebe el proyecto.', photo: '4' },
-        { name: 'Panos Eléctricos Domiciliarios', class: 'class5', title: 'Elaboración y Diseño de Planos Domiciliarios', description: 'Brindamos el servicio de planos Eléctricos, Diagramas Unifilares, Conexión Domiciliaria, Red de Alimentación, Banco de Medidores, Circuitos Eléctricos de Alimentación, Conmutaciones, Bombas para Cistenas y Tanque, Sistemas de Ascensores, Red de Alumbrado exterior, hacemos todo Respetando las Normas Técnicas Vigentes para que el inspector de Enel apruebe el proyecto.', photo: '5' },
-        { name: 'Sistema de Pozo a Tierra', class: 'class6', title: 'Mantenimiento, Diseño, Construccion y Certificación de Pozos a Tierra', description: 'Ofrecemos Mantenimiento, Construcción, Medición, Reactivación y Otorgamos Certificado de Protocolo de pruebas de Pozo a Tierra firmados por nuestros Ingenieros Electricistas, colegiados y habilitados por el CIP (Colegio de Ingenieros del Perú)', photo: '6' }
+        { name: 'Instalaciones Eléctricas', list: [{ name: 'servicio1' }, { name: 'servicio2' }, { name: 'servicio3' }, { name: 'servicio4' }], title: 'Mantenimientos e Instalaciones Eléctricas', description: 'Brindamos servicios de instalación y mantenimiento eléctrico en comercios, residencias e industrias, respetando las normas del código nacional de electricidad y el reglamento nacional de edificaciones. Ofrecemos soluciones a la medida al precio justo, con el estándar de calidad, seguridad para lograr la satisfacción de cada uno de nuestros clientes.', photo: '1' },
+        { name: 'Sistemas Eléctricos', list: [{ name: 'servicio1' }, { name: 'servicio2' }, { name: 'servicio3' }, { name: 'servicio4' }], title: 'Mantenimiento, Instalacion y Diseño de Sistemas Eléctricos', description: 'Brindamos servicios de diseño de sistemas eléctricos de Media y Baja Tensión, subestaciones eléctricas, sistema de iluminación, estudios eléctricos de flujo de carga, cortocircuito, arranque de motores, arco eléctrico. Ademas realizamos mantenimiento preventivo y correctivo.', photo: '2' },
+        { name: 'Sistemas Electrónicos', list: [{ name: 'servicio1' }, { name: 'servicio2' }, { name: 'servicio3' }, { name: 'servicio4' }], title: 'Mantenimiento, Instalacion y Diseño de Sistemas Eléctrónicos', description: 'Brindamos el servicio de Programación de PLC y HMI,Configuracion y puesta en marcha de Variadores de frecuencia para servomotores, Instalación de sistemas de supervisión y control SCADA, Comunicacion Inalámbrica, Telemetría, Tableros de control de PLC, Tambien brindamos soporte a plantas de nivel, presioón, entre otros.', photo: '3' },
+        { name: 'Panos Eléctricos Industriales', list: [{ name: 'servicio1' }, { name: 'servicio2' }, { name: 'servicio3' }, { name: 'servicio4' }], title: 'Elaboración y Diseño de Planos Industriales', description: 'Brindamos el servicio de planos Eléctricos, Diagramas Unifilares, Conexión Domiciliaria, Red de Alimentación, Banco de Medidores, Circuitos Eléctricos de Alimentación, Conmutaciones, Bombas para Cistenas y Tanque, Sistemas de Ascensores, Red de Alumbrado exterior, hacemos todo Respetando las Normas Técnicas Vigentes para que el inspector de Enel apruebe el proyecto.', photo: '4' },
+        { name: 'Panos Eléctricos Domiciliarios', list: [{ name: 'servicio1' }, { name: 'servicio2' }, { name: 'servicio3' }, { name: 'servicio4' }], title: 'Elaboración y Diseño de Planos Domiciliarios', description: 'Brindamos el servicio de planos Eléctricos, Diagramas Unifilares, Conexión Domiciliaria, Red de Alimentación, Banco de Medidores, Circuitos Eléctricos de Alimentación, Conmutaciones, Bombas para Cistenas y Tanque, Sistemas de Ascensores, Red de Alumbrado exterior, hacemos todo Respetando las Normas Técnicas Vigentes para que el inspector de Enel apruebe el proyecto.', photo: '5' },
+        { name: 'Sistema de Pozo a Tierra', list: [{ name: 'servicio1' }, { name: 'servicio2' }, { name: 'servicio3' }, { name: 'servicio4' }], title: 'Mantenimiento, Diseño, Construccion y Certificación de Pozos a Tierra', description: 'Ofrecemos Mantenimiento, Construcción, Medición, Reactivación y Otorgamos Certificado de Protocolo de pruebas de Pozo a Tierra firmados por nuestros Ingenieros Electricistas, colegiados y habilitados por el CIP (Colegio de Ingenieros del Perú)', photo: '6' }
       ]
     }
   },
   methods: {
     closeModal () {
       this.modal = !this.modal
+    },
+    showInfo (n) {
+      this.title = this.services[n].title
+      this.description = this.services[n].description
+      this.list = this.services[n].list
+      this.filename = this.services[n].photo
     }
   }
 }
