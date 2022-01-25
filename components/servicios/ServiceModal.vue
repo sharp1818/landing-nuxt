@@ -84,7 +84,6 @@ export default {
       display: flex;
       justify-content: center;
       padding: 10px 0px;
-      opacity: 80%;
       img {
         width: 280px;
         height: 280px;

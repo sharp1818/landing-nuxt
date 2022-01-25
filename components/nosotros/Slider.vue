@@ -31,7 +31,6 @@ export default {
     display: flex;
     flex-direction: row;
     background-color: #fff;
-    opacity: 80%;
   img {
     width: 150px;
     height: 80px;

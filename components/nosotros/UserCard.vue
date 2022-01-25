@@ -49,7 +49,6 @@ export default {
     object-fit: cover;
     width: 150px;
     height: 225px;
-    opacity: 70%;
     border-radius: 4%;
     @media (min-width: 300px) {
       width: 200px;
