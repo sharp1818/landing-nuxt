@@ -94,7 +94,6 @@ export default {
           width: 280px;
           height: 280px;
           background-size: cover;
-          opacity: 50%;
           list-style: none;
           cursor: pointer;
           .service-layout{
@@ -113,7 +112,6 @@ export default {
           }
           &:hover{
             transform:scale(1.04);
-            opacity: 90%;
             .service-layout{
               .service-background {
                 transform: translateX(10px);
