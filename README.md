@@ -1,5 +1,5 @@
 # technician-nuxtApp
-
+Deploy on Heroku : https://electronic-services-app.herokuapp.com/
 ## Build Setup
 
 ```bash
